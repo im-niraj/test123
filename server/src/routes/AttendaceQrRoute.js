@@ -26,16 +26,21 @@ router.post("/addEmp", async(req, res) => {
   }
 })
 
-router.get("/empAttendance", async(req, res) => {
- await attendandeQr.findOne({"empid": req.params.empid}).then(emp => {
-    if(emp.isInside){
-        emp.outTime.push(Date.now());
-        emp.save();
-        res.send({message: "Exit!", data: emp.fullname});
-    }else{
-        emp.inTime.push(Date.now());
-        emp.save();
-        res.send({message: "You have Enter", data: emp.fullname});
+router.get("/empAttendance/:username", async(req, res) => {
+ await attendandeQr.findOne({"empid": req.params.username}).then(emp => {
+    if(emp != null){
+        if(emp.isInside){
+            emp.outTime.push(Date.now());
+            emp.save();
+            res.send({message: "Exit!", data: emp.fullname});
+        }else{
+            emp.inTime.push(Date.now());
+            emp.save();
+            res.send({message: "You have Enter", data: emp.fullname});
+        }
+    }
+    else{
+        res.send({message: "emp not found", data: "not found"});
     }
   });
 })
