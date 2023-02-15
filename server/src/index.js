@@ -22,19 +22,6 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/hello', (_, res) => res.send('Hello from Cules Coding'))
-
-mongoose.connect(process.env.MONGODB, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-}).then(res => {
-    console.log("DB Connected");
-}).catch(err => {
-    console.log("Unable to connect with DB");
-});
-
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.urlencoded({ extended: true }));
-
 // Routes
 app.use("/home", home);
 
