@@ -1,8 +1,9 @@
 import { config } from 'dotenv'
 import express from 'express'
-import { connect as mongoConnect } from 'mongoose'
+import { connect as mongoConnect } from 'mongoose';
 import home from './routes/DigitalRoute';
-import cors from 'cors'
+import cors from 'cors';
+import Attendance from "./routes/AttendaceQrRoute";
 
 import Todo from 'models/Todo'
 
@@ -24,6 +25,7 @@ app.use(cors())
 app.get('/hello', (_, res) => res.send('Hello from Cules Coding'))
 // Routes
 app.use("/home", home);
+app.use("/attendance", Attendance)
 
 // app.post('/addTodo', async (req, res) => {
 // 	const { body } = req
