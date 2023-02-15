@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/adduser", async(req, res) => {
   if(await DigitalMenuModel.digitalMenuUser.findOne({"email": req.body.email}) == null){
-    var text = await QRCode.toDataURL("http://localhost:9001/home/getqr/"+ req.body.username, { margin: 1 });
+    var text = await QRCode.toDataURL("https://quardify-abc.vercel.app/DigitalMenu/menu/"+ req.body.username, { margin: 1 });
     const data = DigitalMenuModel.digitalMenuUser({
         email:req.body.email,
         password: req.body.password,
