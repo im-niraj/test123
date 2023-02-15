@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
   let x = await DigitalMenuModel.digitalMenuUser.findOne({"email": req.body.email});
   if(x != null){
     if(x.password == req.body.password){
-      res.status(200).send("login successful");
+      res.status(200).send({message: "login successful", username : x.username});
     }
     else{
       res.status(403).send("login failed, Invalid password");
