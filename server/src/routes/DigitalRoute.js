@@ -60,6 +60,12 @@ router.post("/login", async (req, res) => {
     res.status(404).send("Please enter valid email address");
   }
 })
+
+router.get("/getAllUser", async (req, res) => {
+    await DigitalMenuModel.digitalMenuUser.find({}).then(user => {
+      res.status(200).json({data : user});
+    })
+})
  
 
 router.get("/getqr/:username", async (req, res) => {
