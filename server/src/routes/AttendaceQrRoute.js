@@ -31,11 +31,13 @@ router.get("/empAttendance/:username", async(req, res) => {
     if(emp != null){
         if(emp.isInside){
             emp.outTime.push(Date.now());
+            emp.isInside = false;
             emp.save();
             res.send({message: "Exit!", data: emp.fullname});
         }else{
             emp.inTime.push(Date.now());
             emp.save();
+            emp.isInside = true;
             res.send({message: "You have Enter", data: emp.fullname});
         }
     }
